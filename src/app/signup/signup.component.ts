@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
       control = this.signupform.controls[name];
       control.setErrors(null);
     });
-    this.signupform.setErrors({ 'invalid': true });
+    this.pwdFlag = false;
   }
 
   onBlur(control) {
