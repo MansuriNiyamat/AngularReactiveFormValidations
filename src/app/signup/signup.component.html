@@ -1,0 +1,75 @@
+<mat-card>
+    <mat-card-title>
+        Sign Up Form
+    </mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="signupform"  >
+           
+            <div class="row">
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="Email ID" formControlName="email" >
+                    <mat-error *ngIf="!signupform.controls['email'].valid && signupform.controls['email'].touched">
+                            {{getErrorMessages ('email')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="Password" type="password" formControlName="password"
+                        (blur)="onBlur(signupform.controls['password'])" >
+                   
+                    <mat-error
+                        *ngIf="!signupform.controls['password'].valid && signupform.controls['password'].touched">
+                       {{getErrorMessages ('password')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="CC Number" formControlName="ccNumber" >
+                    <mat-error
+                        *ngIf="!signupform.controls['ccNumber'].valid && signupform.controls['ccNumber'].touched">
+                        {{getErrorMessages ('ccNumber')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="Name on CC" formControlName="ccName" >
+                    <mat-error *ngIf="!signupform.controls['ccName'].valid && signupform.controls['ccName'].touched">
+                            {{getErrorMessages ('ccName')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="CC Expiration  " formControlName="ccExp" >
+                    <mat-hint>Format should be: MM/YYYY</mat-hint>
+                    <mat-error *ngIf="!signupform.controls['ccExp'].valid && signupform.controls['ccExp'].touched">
+                            {{getErrorMessages ('ccExp')}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="form-element">
+                    <input matInput placeholder="CC Security Code" formControlName="ccSecurityCode">
+                    <mat-error
+                        *ngIf="!signupform.controls['ccSecurityCode'].valid && signupform.controls['ccSecurityCode'].touched">
+                        {{getErrorMessages ('ccSecurityCode')}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row" *ngIf="pwdFlag">
+                    <span class="error">{{genErrorMsg}}</span>
+                </div>
+            <div class="row">
+                <button mat-raised-button color="primary" type="submit" class="button"
+                    [disabled]="!signupform.valid" (click)="onSubmit(signupform.value)">SignUp</button>
+                    <button mat-raised-button color="warn" (click)="clearForm()" class="button">Clear</button>
+            </div>
+        </form>
+        <div *ngIf='jsonFlag' class="row">
+            <span>
+                {{submitedData | json}}
+            </span>
+        </div>
+    </mat-card-content>
+</mat-card>
